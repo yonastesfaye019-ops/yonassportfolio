@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yonas | Video Editor Portfolio</title>
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #1e1e1e;
+      color: #fff;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    a { text-decoration: none; transition: 0.3s; }
+
+    /* Navbar */
+    header {
+      background:#00FF88 ;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    header h1 {
+      font-size: 1.8rem;
+      color: #000;
+    }
+    header p {
+      font-weight: 500;
+      color: #111;
+    }
+    nav {
+      margin-top: 8px;
+    }
+    nav a {
+      margin: 0 12px;
+      color: #fff;
+      font-weight: 500;
+      position: relative;
+    }
+    nav a.active, nav a:hover {
+      color: #000;
+    }
+
+    /* Hero Section */
+    #home {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  url("https://picsum.photos/1600/900?blur") center/cover no-repeat;
+      text-align: center;
+      padding: 20px;
+    }
+    #home h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color:#00C853 ;
+      animation: fadeInDown 1s ease;
+    }
+    #home p {
+      max-width: 600px;
+      margin-bottom: 20px;
+      animation: fadeInUp 1.2s ease;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #00C853;
+      color: #fff;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #00C853; }
+
+    /* Sections */
+    main { max-width: 1100px; margin: auto; padding: 50px 20px; }
+    section { margin-bottom: 80px; text-align: center; opacity: 0; transform: translateY(40px); transition: 0.8s ease; }
+    section.visible { opacity: 1; transform: translateY(0); }
+    section h2 { font-size: 2rem; margin-bottom: 20px; color:#00C853; }
+
+    /* Demo Video */
+    .demo-video iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 420px;
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+
+    /* Portfolio */
+    .portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .portfolio-item {
+      background: #2b2b2b;
+      padding: 15px;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .portfolio-item iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+    }
+
+    /* Contact */
+    .contact-form {
+      max-width: 500px;
+      margin: auto;
+      text-align: left;
+    }
+    .contact-form label {
+      font-weight: 600;
+      display: block;
+      margin-top: 10px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: none;
+      background: #2b2b2b;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .contact-form button {
+      margin-top: 15px;
+      background: #00C853;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .contact-form button:hover { background:#00FF88 ; }
+
+    /* Social Icons */
+    .social {
+      margin-top: 20px;
+    }
+    .social a {
+      margin: 0 10px;
+      font-size: 1.5rem;
+      color: #00C853;
+    }
+    .social a:hover { color: #00FF88; }
+
+    /* Footer */
+    footer {
+      background:#00C853 ;
+      padding: 15px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #111;
+    }
+
+    /* Back to Top */
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00ffaa;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown { from {opacity: 0; transform: translateY(-30px);} to {opacity: 1; transform: translateY(0);} }
+    @keyframes fadeInUp { from {opacity: 0; transform: translateY(30px);} to {opacity: 1; transform: translateY(0);} }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #home h2 { font-size: 1.8rem; }
+      .demo-video iframe { height: 250px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Yonas</h1>
+    <p>Video Editor | Motion Graphics | Storyteller</p>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="home">
+    <h2>Creative Video Editing That Inspires</h2>
+    <p>Transforming raw footage into compelling stories with motion graphics and cinematic cuts.</p>
+    <a href="#portfolio" class="btn">View My Work</a>
+  </section>
+
+  <main>
+    <!-- Portfolio -->
+    <section id="portfolio">
+      <h2>My Work</h2>
+      <div class="portfolio">
+        <div class="portfolio-item">
+          <iframe src="n3.mp4" title="Project 1"></iframe>
+          <p><b>Project 1</b> – Documentary</p>
+        </div>
+        <div class="portfolio-item">
+          <iframe src="n2.mp4" title="Project 2"></iframe>
+          <p><b>Project 2</b> – Talking Head</p>
+        </div>
+        <div class="portfolio-item">
+          <iframe src="n1.mp4" title="Project 3"></iframe>
+          <p><b>Project 3</b> – Short Form</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Hi, I’m <b>Yonas</b>, a passionate video editor skilled in Adobe Premiere Pro, Filmora, Alight Motion, and CapCut.  
+        I specialize in storytelling through creative editing and motion graphics.  
+        My mission is to bring your ideas to life through powerful visuals.
+      </p>
+      <div class="social">
+        <a href="https://youtube.com" target="_Fby investment gruop"></a>
+        <a href="https://instagram.com" target="_yonasatate"></a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form action="mailto:yonastesfaye019@gmail.com" method="post" enctype="text/plain" class="contact-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" >
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" >
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" ></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Yonas | Video Editor Portfolio</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <div id="backToTop">⬆</div>
+
+  <script>
+    // Highlight active nav link
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(sec => {
+        const top = window.scrollY;
+        if (top >= sec.offsetTop - 80) {
+          current = sec.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+
+      // Show back-to-top button
+      document.getElementById("backToTop").style.display = 
+        window.scrollY > 400 ? "block" : "none";
+    });
+
+    // Scroll animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll("section").forEach(sec => observer.observe(sec));
+
+    // Back to top click
+    document.getElementById("backToTop").addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
